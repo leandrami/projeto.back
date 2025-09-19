@@ -1,10 +1,31 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700");
-/*testee github*/
+@import url("https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300;400;700&display=swap");
+
+
+.sulphur-point-light {
+  font-family: "Sulphur Point", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.sulphur-point-regular {
+  font-family: "Sulphur Point", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+.sulphur-point-bold {
+  font-family: "Sulphur Point", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+
 body {
   margin: 0;
   min-height: 100vh;
   font-size: 14px;
-  font-family: Roboto, sans-serif;
+  font-family: Sulphur Point, sans-serif;
   background: var(--warning-color);
 }
 
