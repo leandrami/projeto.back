@@ -6,7 +6,6 @@ class Produto {
     this.quantidade = quantidade;
   }
 
-  // Método para calcular o subtotal de cada produto
   subtotal() {
     return this.preco * this.quantidade;
   }
@@ -26,27 +25,32 @@ class Carrinho {
     return this.produtos.reduce((soma, produto) => soma + produto.subtotal(), 0);
   }
 
-  mostrarResumo() {
-    console.log("Resumo da Compra:");
+  mostrarNoHTML() {
+    const lista = document.getElementById("lista-produtos");
+    const totalElem = document.getElementById("total");
+
+    lista.innerHTML = ""; // limpa antes de adicionar
+
     this.produtos.forEach(produto => {
-      console.log(
-        `${produto.nome} - ${produto.quantidade}x R$${produto.preco.toFixed(2)} = R$${produto.subtotal().toFixed(2)}`
-      );
+      const li = document.createElement("li");
+      li.textContent = `${produto.nome} - ${produto.quantidade}x R$${produto.preco.toFixed(2)} = R$${produto.subtotal().toFixed(2)}`;
+      lista.appendChild(li);
     });
-    console.log("TOTAL: R$" + this.calcularTotal().toFixed(2));
+
+    totalElem.textContent = "TOTAL: R$ " + this.calcularTotal().toFixed(2);
   }
 }
 
-// Criando 3 produtos
+// Criando produtos
 const prod1 = new Produto("Pizza", 30, 2);
 const prod2 = new Produto("Suco", 8, 3);
 const prod3 = new Produto("Sobremesa", 15, 1);
 
-// Criando o carrinho e adicionando os produtos
+// Criando carrinho
 const carrinho = new Carrinho();
 carrinho.adicionarProduto(prod1);
 carrinho.adicionarProduto(prod2);
 carrinho.adicionarProduto(prod3);
 
-// Exibindo resumo no console
-carrinho.mostrarResumo();
+// Mostra no HTML
+carrinho.mostrarNoHTML();
