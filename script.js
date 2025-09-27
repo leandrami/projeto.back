@@ -23,10 +23,9 @@ class Carrinho {
     this.produtos = []; // Lista (array) que vai armazenar todos os produtos do carrinho
   }
 
-  // Método para adicionar um produto ao carrinho
-  adicionarProduto(novoProduto) {
-    // Verifica se o produto já existe no carrinho
-    const existente = this.produtos.find(p => p.nome === novoProduto.nome);
+  
+  adicionarProduto(novoProduto) { // Método para adicionar um produto ao carrinho
+        const existente = this.produtos.find(p => p.nome === novoProduto.nome);   // Verifica se o produto já existe no carrinho
     if (existente) {
       existente.quantidade += novoProduto.quantidade; // Se já existir, só aumenta a quantidade
     } else {
@@ -35,34 +34,34 @@ class Carrinho {
     this.mostrarNoHTML(); // Atualiza a interface do carrinho
   }
 
-  // Método para remover um produto (ou diminuir a quantidade)
-  removerProduto(nome) {
+  
+  removerProduto(nome) { // Método para remover um produto (ou diminuir a quantidade)
     const produto = this.produtos.find(p => p.nome === nome);
     if (produto) {
       produto.quantidade--; // Diminui 1 unidade
       if (produto.quantidade <= 0) {
-        // Se a quantidade chegar a zero, remove o produto da lista
-        this.produtos = this.produtos.filter(p => p.nome !== nome);
+        
+        this.produtos = this.produtos.filter(p => p.nome !== nome); // Se a quantidade chegar a zero, remove o produto da lista
       }
     }
     this.mostrarNoHTML(); // Atualiza a interface do carrinho
   }
 
-  // Método que calcula o valor total da compra
-  calcularTotal() {
-    // Soma todos os subtotais dos produtos
-    return this.produtos.reduce((soma, produto) => soma + produto.subtotal(), 0);
+  
+  calcularTotal() {  // Método que calcula o valor total da compra
+    
+    return this.produtos.reduce((soma, produto) => soma + produto.subtotal(), 0); // Soma todos os subtotais dos produtos
   }
 
-  // Método para mostrar os produtos no HTML
-  mostrarNoHTML() {
+  
+  mostrarNoHTML() {  // Método para mostrar os produtos no HTML
     const lista = document.getElementById("lista-produtos"); // UL onde os itens serão exibidos
     const totalElem = document.getElementById("total");      // Elemento que mostra o valor total
 
     lista.innerHTML = ""; // Limpa a lista antes de recriar
 
-    // Para cada produto do carrinho, cria um <li> no HTML
-    this.produtos.forEach(produto => {
+    
+    this.produtos.forEach(produto => {  // Para cada produto do carrinho, cria um <li> no HTML
       const li = document.createElement("li");
       li.classList.add("food-list__item");    // Classe para estilização
 
@@ -80,8 +79,8 @@ class Carrinho {
       lista.appendChild(li);    // Adiciona o <li> na lista do carrinho
     });
 
-    // Mostra o total formatado no HTML
-    totalElem.textContent = "TOTAL: R$ " + this.calcularTotal().toFixed(2);
+    
+    totalElem.textContent = "TOTAL: R$ " + this.calcularTotal().toFixed(2);  // Mostra o total formatado no HTML
 
     // ----------------------
     // Eventos dos botões + e -
@@ -104,8 +103,8 @@ class Carrinho {
     });
   }
 
-  // Método auxiliar: retorna o preço de um produto pelo nome
-  getPreco(nome) {
+
+  getPreco(nome) {  // Método auxiliar: retorna o preço de um produto pelo nome
     const produto = this.produtos.find(p => p.nome === nome);
     return produto ? produto.preco : 0;
   }
@@ -127,6 +126,9 @@ document.querySelectorAll(".btn-comprar").forEach(botao => {
     carrinho.adicionarProduto(produto);          // Adiciona o produto ao carrinho
   });
 });
+
+
+
 
 
 // ----------------------
