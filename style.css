@@ -1,5 +1,40 @@
 @import url("https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300;400;700&display=swap");
 
+.food-list__item {
+  display: flex;
+  align-items: center;        /* centraliza verticalmente */
+  justify-content: space-between; /* joga o preço para a direita */
+  gap: 10px;                  /* espaçamento entre colunas */
+  margin-bottom: 10px;
+}
+
+.food-buy-amount {
+  min-width: 60px;  /* reserva espaço fixo pros botões e quantidade */
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.food-name {
+  flex: 1;           /* ocupa o espaço do meio */
+}
+
+.food-price {
+  min-width: 80px;   /* reserva espaço fixo pro preço */
+  text-align: right; /* alinha valores na mesma coluna */
+}
+
+
+
+
+
+
+.botao-carr {
+    border-bottom-color: rgb(252 112 14);
+    background: rgb(252 112 14);
+    border-radius: 10px;
+    color:rgb(255, 255, 255);
+    border: none;}
 
 .sulphur-point-light {
   font-family: "Sulphur Point", sans-serif;
@@ -330,12 +365,12 @@ body {
   row-gap: 33px;
   padding: 0;
   margin: 54px 0 0 0;
-  font-size: 10px;
+  font-size: 15px;
   font-weight: bold;
   list-style-type: none;
 }
 .food-list__item {
-  display: grid;
+  /* display: grid;  */
   align-items: center;
 }
 .food-list__item:not(:last-child) {
