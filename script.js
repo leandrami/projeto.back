@@ -9,7 +9,7 @@ class Produto {
     this.quantidade = quantidade; // Quantidade comprada (padrão = 1)
   }
 
-  // Método que calcula o subtotal = preço * quantidade
+  // Método que calcula o subtotal, preço por quantidade
   subtotal() {
     return this.preco * this.quantidade;
   }
@@ -20,48 +20,45 @@ class Produto {
 // ----------------------
 class Carrinho {
   constructor() {
-    this.produtos = []; // Lista (array) que vai armazenar todos os produtos do carrinho
+    this.produtos = [];     // Array que vai armazenar todos os produtos do carrinho, onde cada produto tem uma variavel temporária 'p' 
   }
 
   
-  adicionarProduto(novoProduto) { // Método para adicionar um produto ao carrinho
-        const existente = this.produtos.find(p => p.nome === novoProduto.nome);   // Verifica se o produto já existe no carrinho
+  adicionarProduto(novoProduto) {     // Método para adicionar um produto ao carrinho
+        const existente = this.produtos.find(p => p.nome === novoProduto.nome);   // Verifica se o produto já existe no carrinho: funçãao procurar
     if (existente) {
-      existente.quantidade += novoProduto.quantidade; // Se já existir, só aumenta a quantidade
+      existente.quantidade += novoProduto.quantidade;    // se já existir, aumenta a quantidade em uma unidade
     } else {
-      this.produtos.push(novoProduto); // Se não existir, adiciona o produto no array
+      this.produtos.push(novoProduto);     // se não existir, adiciona o produto no array (carrinho)
     }
-    this.mostrarNoHTML(); // Atualiza a interface do carrinho
+    this.mostrarNoHTML();     //Atualiza o carrinho
   }
 
   
-  removerProduto(nome) { // Método para remover um produto (ou diminuir a quantidade)
+  removerProduto(nome) {     // método para remover um produto (ou diminuir a quantidade)
     const produto = this.produtos.find(p => p.nome === nome);
     if (produto) {
-      produto.quantidade--; // Diminui 1 unidade
+      produto.quantidade--;      // diminui 1 unidade
       if (produto.quantidade <= 0) {
-        
-        this.produtos = this.produtos.filter(p => p.nome !== nome); // Se a quantidade chegar a zero, remove o produto da lista
+        this.produtos = this.produtos.filter(p => p.nome !== nome);      // Se a quantidade chegar a zero, o produto será removido do carrinho (lista 'produtos')
       }
     }
-    this.mostrarNoHTML(); // Atualiza a interface do carrinho
+    this.mostrarNoHTML();      // Atualiza o carrinho
   }
 
   
   calcularTotal() {  // Método que calcula o valor total da compra
     
-    return this.produtos.reduce((soma, produto) => soma + produto.subtotal(), 0); // Soma todos os subtotais dos produtos
+    return this.produtos.reduce((soma, produto) => soma + produto.subtotal(), 0);    // Soma todos os subtotais dos produtos
   }
-
-  
   mostrarNoHTML() {  // Método para mostrar os produtos no HTML
-    const lista = document.getElementById("lista-produtos"); // UL onde os itens serão exibidos
-    const totalElem = document.getElementById("total");      // Elemento que mostra o valor total
+    const lista = document.getElementById("lista-produtos");   // itens que serão exibidos
+    const totalElem = document.getElementById("total");        // mostra o valor total
 
-    lista.innerHTML = ""; // Limpa a lista antes de recriar
+    lista.innerHTML = "";   // limpa a lista antes de recriar
 
     
-    this.produtos.forEach(produto => {  // Para cada produto do carrinho, cria um <li> no HTML
+    this.produtos.forEach(produto => {  // A cada produto do carrinho, cria um <li> no HTML
       const li = document.createElement("li");
       li.classList.add("food-list__item");    // Classe para estilização
 
@@ -82,9 +79,9 @@ class Carrinho {
     
     totalElem.textContent = "TOTAL: R$ " + this.calcularTotal().toFixed(2);  // Mostra o total formatado no HTML
 
-    // ----------------------
-    // Eventos dos botões + e -
-    // ----------------------
+    // ---------------
+    // Botões + e -
+    // ---------------
 
     // Botão "+" para aumentar quantidade
     document.querySelectorAll(".btn-mais").forEach(botao => {
@@ -115,9 +112,9 @@ class Carrinho {
 // ----------------------
 const carrinho = new Carrinho(); // Cria um objeto carrinho vazio
 
-// ----------------------
+// -------------------------------------------
 // Captura dos cliques nos botões "COMPRAR"
-// ----------------------
+// -------------------------------------------
 document.querySelectorAll(".btn-comprar").forEach(botao => {
   botao.addEventListener("click", () => {
     const nome = botao.getAttribute("data-nome");   // Pega o nome do produto do botão
@@ -128,30 +125,30 @@ document.querySelectorAll(".btn-comprar").forEach(botao => {
 });
 
 
+//----------------------------------------------------------
 
 
-
-// ----------------------
+// ------------------------------
 // Cálculo do tempo de entrega
-// ----------------------
+// ------------------------------
 
 // Função que calcula tempo estimado em minutos baseado na distância
 function calcularTempoEntrega(distanciaKm) {
-  const velocidadeMediaKmH = 30; // Velocidade média do entregador (30 km/h)
-  const minutos = (distanciaKm / velocidadeMediaKmH) * 60; // Regra de 3 simples
-  return Math.ceil(minutos); // Arredonda para cima
+  const velocidadeMediaKmH = 30;    // Velocidade média do entregador (30 km/h)
+  const minutos = (distanciaKm / velocidadeMediaKmH) * 60;     // Regra de 3 simples
+  return Math.ceil(minutos);        // Arredonda para cima
 }
 
 // Evento do botão "Calcular tempo"
 document.getElementById("calcular-tempo").addEventListener("click", () => {
-  const endereco = document.getElementById("endereco-cliente").value; // Pega o valor do input
+  const endereco = document.getElementById("endereco-cliente").value; 
 
   if (endereco.trim() === "") {
-    alert("Por favor, digite um endereço!"); // Caso não digite nada
+    alert("Por favor, digite um endereço!"); 
     return;
   }
 
-  // Simulação: sempre considera 8 km por enquanto
+  // Simulação: sempre considera 8 km 
   const distanciaKm = 8;  
   const tempo = calcularTempoEntrega(distanciaKm); // Calcula tempo baseado na distância
 
